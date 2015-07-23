@@ -27,7 +27,7 @@ def api():
     cmd = 'docker rm {}'.format(subdomain)
     print cmd
     Popen(cmd.strip().split())
-    cmd = 'docker run -P --name {} -e "BRANCH={}" -e "VIRTUAL_HOST={}.192.168.59.103.xip.io" {}'.format(subdomain, branch, subdomain, repo)
+    cmd = 'docker run -P --name {} -e BRANCH={} -e VIRTUAL_HOST={}.chaxster.com {}'.format(subdomain, branch, subdomain, repo)
     print cmd
     cmd = cmd.strip().split()
     print cmd
