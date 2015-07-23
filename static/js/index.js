@@ -1,18 +1,35 @@
 $( document ).ready(function() {
-	$("#deploy-form").on("submit",function() {
-	  var url = "path/to/post.soemthing";
-	  console.log("deploy!");
-	  $.ajax({
-	    url: url, 
-	    type: 'post',
-	    data: {  
-	      repo: 'github.com/artburkart/colored_pages',
-	        branch: 'red',
-	        subdomain: 'whatever'
-	    },
-	    success: function(data) {
-	      alert(data);
-	    }
-	 });
-	});
+  $.fn.serializeObject = function()
+  {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+      });
+      return o;
+  };
+  $("#deploy-form").on("submit",function(e) {
+    e.preventDefault();
+    var url = "/api";
+    var form = $("#deploy-form").serializeObject();
+      form.repo = 'github.com/artburkart/colored_pages';
+    console.log(form);
+    $.ajax({
+      url: url, 
+      type: 'post',
+      data: JSON.stringify(form),
+      contentType: "application/json",
+      datatype : "json",
+      success: function(data) {
+        alert("You've Deployed!");
+      }
+   });
+  });
 }); 
