@@ -8,43 +8,74 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   </head>
   <body>
-    <h1>Docker Deployer</h1>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-header">
+            <a class="navbar-brand" href="#">Maxwell Docker Deployer Dashboard</a>
+      </div> 
+  </nav>
+
     <div class="container">
-      <form id="deploy-form"class="form-group">
-        <div class="input-group col-md-4">
-          <input type="text" class="form-control" placeholder="subdomain" aria-describedby="basic-addon2">
-          <span class="input-group-addon" id="basic-addon2">.chaxster.com</span>
-        </div>
-        <label>
-          Branch Name:
-          <select class="selectpicker">
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="yellow">Yellow</option>
-          </select>
-        </label>
-        <br/>
-        <button class="btn btn-primary">Deploy!</button>
-      </form>
+    <div class="jumbotron">
+      <h1 style="text-align: center">Get Ready to Deploy!</h1>
+      <br>
+      <br>
+        <form style="text-align: center" id="deploy-form" class="form-inline">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control" name="subdomain" placeholder="choose subdomain" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">.chaxster.com</span>
+          </div>
+          <label>select a repo</label>
+            <select class="form-control" name="branch">
+              <option value="colored_pages">Colors</option>
+              <option value="titan1">Titan</option>
+            </select>
+            <label>&amp select a branch</label>
+              <select class="form-control" name="branch">
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="yellow">Yellow</option>
+              </select>
+          <br>
+          <br>
+          <button class="btn btn-lg btn-primary">Deploy!</button>
+        </form>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="javascript" src="/static/js/index.js"></script>
     <script>
       $( document ).ready(function() {
-        $("#deploy-form").on("submit",function() {
-          var url = "path/to/post.soemthing";
-          console.log("deploy!");
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+        $("#deploy-form").on("submit",function(e) {
+          e.preventDefault();
+          var url = "/api";
+          var form = $("#deploy-form").serializeObject();
+            form.repo = 'github.com/artburkart/colored_pages';
+          console.log(form);
           $.ajax({
             url: url, 
             type: 'post',
-            data: {  
-              repo: 'github.com/artburkart/colored_pages',
-                branch: 'red',
-                subdomain: 'whatever'
-            },
+            data: JSON.stringify(form),
+            contentType: "application/json",
+            datatype : "json",
             success: function(data) {
-              alert(data);
+              alert("You've Deployed!");
             }
          });
         });
@@ -52,11 +83,3 @@
     </script>
   </body>
 </html>
-
-<!-- {
-  repo: 'github.com/artburkart/colored_pages'
-  branch: 'red',
-  subdomain: 'whatever'
-}
-
- -->
