@@ -30,4 +30,19 @@ $( document ).ready(function() {
       }
    });
   });
+  $("#delete-form").on("submit",function(e) {
+    e.preventDefault();
+    var url = "/api/delete";
+    var form = $("#delete-form").serializeObject();
+    $.ajax({
+      url: url, 
+      type: 'post',
+      data: JSON.stringify(form),
+      contentType: "application/json",
+      datatype : "json",
+      success: function(data) {
+        alert("You've Deleted An Instance!");
+      }
+   });
+  });
 }); 
