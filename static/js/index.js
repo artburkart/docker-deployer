@@ -19,7 +19,6 @@ $( document ).ready(function() {
     e.preventDefault();
     var url = "/api";
     var form = $("#deploy-form").serializeObject();
-    console.log(form);
     $.ajax({
       url: url, 
       type: 'post',
