@@ -1,21 +1,62 @@
 <!DOCTYPE html>
-<html>
-  <form>
-    <label>
-      Branch Name:
-      <select value="red">
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="yellow">Yellow</option>
-      </select>
-    </label>
-    <br/>
-    <button>Deploy!</button>
-  </form>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Docker Deployer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+    <h1>Docker Deployer</h1>
+    <div class="container">
+      <form id="deploy-form"class="form-group">
+        <div class="input-group col-md-4">
+          <input type="text" class="form-control" placeholder="subdomain" aria-describedby="basic-addon2">
+          <span class="input-group-addon" id="basic-addon2">.chaxster.com</span>
+        </div>
+        <label>
+          Branch Name:
+          <select class="selectpicker">
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+          </select>
+        </label>
+        <br/>
+        <button class="btn btn-primary">Deploy!</button>
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="javascript" src="/static/js/index.js"></script>
+    <script>
+      $( document ).ready(function() {
+        $("#deploy-form").on("submit",function() {
+          var url = "path/to/post.soemthing";
+          console.log("deploy!");
+          $.ajax({
+            url: url, 
+            type: 'post',
+            data: {  
+              repo: 'github.com/artburkart/colored_pages',
+                branch: 'red',
+                subdomain: 'whatever'
+            },
+            success: function(data) {
+              alert(data);
+            }
+         });
+        });
+      }); 
+    </script>
+  </body>
 </html>
 
-{
+<!-- {
   repo: 'github.com/artburkart/colored_pages'
   branch: 'red',
   subdomain: 'whatever'
 }
+
+ -->
