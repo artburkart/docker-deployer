@@ -19,8 +19,6 @@ $( document ).ready(function() {
     e.preventDefault();
     var url = "/api";
     var form = $("#deploy-form").serializeObject();
-      form.repo = 'github.com/artburkart/colored_pages';
-    console.log(form);
     $.ajax({
       url: url, 
       type: 'post',
@@ -29,6 +27,21 @@ $( document ).ready(function() {
       datatype : "json",
       success: function(data) {
         alert("You've Deployed!");
+      }
+   });
+  });
+  $("#delete-form").on("submit",function(e) {
+    e.preventDefault();
+    var url = "/api/delete";
+    var form = $("#delete-form").serializeObject();
+    $.ajax({
+      url: url, 
+      type: 'post',
+      data: JSON.stringify(form),
+      contentType: "application/json",
+      datatype : "json",
+      success: function(data) {
+        alert("You've Deleted An Instance!");
       }
    });
   });

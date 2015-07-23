@@ -29,16 +29,20 @@
               <option value="colored_pages">Colors</option>
               <option value="titan1">Titan</option>
             </select>
-            <label>&amp select a branch</label>
-              <select class="form-control" name="branch">
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="yellow">Yellow</option>
-              </select>
-          <br>
-          <br>
-          <button class="btn btn-lg btn-primary">Deploy!</button>
+            <input type="text" class="form-control" name="branch" placeholder="choose branch" aria-describedby="basic-addon2">
+            <button class="btn btn-primary">Deploy!</button>
         </form>
+        <br>
+        <br>
+        <br>
+        <form style="text-align: center" id="delete-form" class="form-inline">
+          <div class="input-group col-md-4">
+            <input type="text" class="form-control" name="subdomain" placeholder="delete subdomain" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">.chaxster.com</span>
+          </div>
+          <button class="btn btn-danger">DELETE!</button>
+        </form>
+
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
