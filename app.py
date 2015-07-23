@@ -3,10 +3,9 @@ from flask import Flask
 from flask import jsonify
 from flask import render_template
 from flask import request
-from subprocess import check_output
+from subprocess import Popen
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
@@ -21,10 +20,18 @@ def api():
     subdomain = req.get('subdomain')
     if subdomain is None:
         abort(403)
-    cmd = 'docker kill {0} && docker rm {0}'.format(branch)
-    check_output(cmd.strip().split())
-    cmd = 'docker run -e "BRANCH={}" -e "VIRTUAL_HOST={}.chaxster.com" {}'.format(branch, subdomain, repo)
-    check_output(cmd.strip().split())
+
+    cmd = 'docker kill {}'.format(subdomain) 
+    print cmd
+    Popen(cmd.strip().split())
+    cmd = 'docker rm {}'.format(subdomain)
+    print cmd
+    Popen(cmd.strip().split())
+    cmd = 'docker run -P --name {} -e "BRANCH={}" -e "VIRTUAL_HOST={}.192.168.59.103.xip.io" {}'.format(subdomain, branch, subdomain, repo)
+    print cmd
+    cmd = cmd.strip().split()
+    print cmd
+    Popen(cmd)
     return jsonify(request.get_json())
 
 

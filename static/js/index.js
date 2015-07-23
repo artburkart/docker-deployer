@@ -19,8 +19,6 @@ $( document ).ready(function() {
     e.preventDefault();
     var url = "/api";
     var form = $("#deploy-form").serializeObject();
-      form.repo = 'github.com/artburkart/colored_pages';
-    console.log(form);
     $.ajax({
       url: url, 
       type: 'post',
