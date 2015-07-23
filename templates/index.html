@@ -13,7 +13,6 @@
             <a class="navbar-brand" href="#">Maxwell Docker Deployer Dashboard</a>
       </div> 
   </nav>
-
     <div class="container">
     <div class="jumbotron">
       <h1 style="text-align: center">Get Ready to Deploy!</h1>
@@ -30,13 +29,8 @@
               <option value="titan1">Titan</option>
             </select>
             <label>&amp select a branch</label>
-              <select class="form-control" name="branch">
-                <option value="red">Red</option>
-                <option value="blue">Blue</option>
-              </select>
-          <br>
-          <br>
-          <button class="btn btn-lg btn-primary">Deploy!</button>
+            <input type="text" class="form-control" name="branch" placeholder="choose branch" aria-describedby="basic-addon2">
+            <button class="btn btn-primary">Deploy!</button>
         </form>
       </div>
     </div>
